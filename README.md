@@ -27,33 +27,51 @@ Developers and technical founders who use Claude Code and want a consistent, rep
 - Reading and editing Markdown
 - The basics of how Claude Code works
 
-## Quick Start
+## Starting a New Project
+
+### Step 1: Think through your project first
+
+Before touching Claude Code, use a Claude Chat project (or ChatGPT, or whatever you think with) to work through your project's architecture. Have a conversation covering what you're building, who it's for, tech stack choices, key design decisions, and how you'll deploy it. Then ask it to produce:
+
+- **A project brief or seed document** — What you're building, why, key architectural decisions, governance model if applicable. The "what" and "why."
+- **A technical architecture document** — Tech stack, infrastructure, deployment model, data model, integrations. The "how."
+- **An onboarding guide** (optional) — How to set up the dev environment, deploy, access services. Useful for future-you or collaborators.
+
+You don't need a specific prompt template for these — the quality comes from the back-and-forth conversation, not from a single prompt. Start with whatever you have and add more as your project takes shape.
+
+### Step 2: Clone the template
 
 ```bash
-# Clone the template
 git clone https://github.com/wally-msl/claude-project-template.git my-project
 cd my-project
-
-# Remove the template's git history and start fresh
 rm -rf .git
 git init
+```
 
-# Open in Claude Code and run the onboarding command
+### Step 3: Drop in your seed docs
+
+Copy whatever project documents you created in Step 1 into the `docs/` folder.
+
+### Step 4: Run the onboarding command
+
+```bash
 claude
 # Then type: /onboard
 ```
 
-The `/onboard` command will walk you through customizing `CLAUDE.md` for your project.
+The `/onboard` command walks you through customizing `CLAUDE.md` — your tech stack, deploy process, SSH targets, architecture decisions. Takes about 5 minutes.
 
-## What You Should Bring
+### Step 5: Point CLAUDE.md at your docs
 
-This template gives you the *workflow*. You supply the *context*. The more project context you give Claude Code via `CLAUDE.md` and docs, the better it performs. We recommend having (or creating) these for your project:
+After onboarding, add your documents to the "Current canonical documents" section in `CLAUDE.md` so Claude Code knows they exist and references them when making decisions.
 
-- **A project brief or seed document** — What you're building, why, key architectural decisions, governance model if applicable. This is the "what" and "why" of your project.
-- **A technical architecture document** — Tech stack, infrastructure, deployment model, data model, integrations. This is the "how" of your project.
-- **An onboarding guide** (optional) — How to set up the development environment, deploy, access services. Useful if you're onboarding collaborators or future-you.
+### Step 6: Start building
 
-These go in `docs/` and get referenced from `CLAUDE.md`. You don't need all of them on day one — start with whatever you have and add more as your project takes shape.
+```
+/explore
+```
+
+That's it. The template handles the Claude Code setup, your seed docs handle the project context, and you're building from the first session.
 
 ## Template Structure
 
