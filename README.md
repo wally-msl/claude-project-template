@@ -31,7 +31,7 @@ Developers and technical founders who use Claude Code and want a consistent, rep
 
 ```bash
 # Clone the template
-git clone https://github.com/walter-msl/claude-project-template.git my-project
+git clone https://github.com/wally-msl/claude-project-template.git my-project
 cd my-project
 
 # Remove the template's git history and start fresh
