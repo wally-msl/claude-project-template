@@ -27,3 +27,5 @@ Reusable solutions to problems encountered during development. Created by `/save
 ## When to Write a Recipe
 
 If you spent more than 10 minutes debugging something and the fix wasn't obvious from the error message, it's worth a recipe.
+
+See `../../examples/recipes/` for a sample recipe in this format.

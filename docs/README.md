@@ -20,3 +20,5 @@ This directory holds your project's canonical documents — the source of truth 
 ## Getting Started
 
 You don't need all of these on day one. Start with whatever context you have and add more as your project takes shape. Even a rough project brief is better than nothing — Claude Code uses whatever context you give it.
+
+See `../examples/seed-docs/` for minimal versions of a project brief and technical architecture doc you can copy and adapt.

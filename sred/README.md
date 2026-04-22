@@ -1,8 +1,10 @@
-# SR&ED Documentation
+# SR&ED Documentation (Optional R&D Evidence Module)
 
-This directory stores contemporaneous records of experimental development work for Canadian [SR&ED (Scientific Research and Experimental Development)](https://www.canada.ca/en/revenue-agency/services/scientific-research-experimental-development-tax-incentive-program.html) tax credit claims.
+This directory stores contemporaneous records of experimental development work. It was designed for Canadian [SR&ED (Scientific Research and Experimental Development)](https://www.canada.ca/en/revenue-agency/services/scientific-research-experimental-development-tax-incentive-program.html) tax credit claims, where "created as the work happens" records are the strongest form of evidence.
 
-**If you're not a Canadian corporation doing R&D, you can safely delete this directory.**
+The pattern is useful beyond Canada. Any team that has had to reconstruct *why* a research direction was taken — months later, without the original reasoning — benefits from this kind of journal. If that doesn't describe you, delete this directory and skip the `/sred-log` command. The rest of the template doesn't depend on it.
+
+See `../examples/sred/` for a sample hypothesis log with two dated entries.
 
 ## Why This Matters
 
