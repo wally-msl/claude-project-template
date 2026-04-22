@@ -62,6 +62,20 @@ See `AGENTS.md` at the repo root for a more structured version of this review, w
 
 The goal is not blind adoption. The goal is selective adoption with judgment.
 
+## Operating assumptions to review
+
+This template is opinionated, which means it bakes in tradeoffs that fit some workflows and chafe against others. The defaults were chosen for a disciplined solo operator or small founding team working on a personal or private repo. If that's not your context, the following assumptions are worth naming and changing before adoption. None of these are bugs. They are choices the template does not make for you.
+
+- **The model is allowed to act, not just suggest.** `/execute` and `/deploy`, paired with the permission allowlist pattern, give Claude direct shell and SSH access. Good for a solo operator. Risky in a shared or production environment without additional guardrails. If that's you, consider: scoping the allowlist to a specific deploy script rather than `Bash(ssh user@host:*)`; requiring a human approval step for production touches; adding branch protection so agent-authored commits can't land on `main` without review.
+- **"Commit directly to `main`" is the default.** `CLAUDE.md`'s git practices and the deploy flow assume this. Fine for solo work. For shared codebases, change the guidance to a branch-and-PR flow and enable branch protection on the remote.
+- **Environments are not separated.** The commands don't distinguish local, staging, and production. If you have separate environments, add them to `CLAUDE.md` explicitly and consider environment-specific allowlists or separate commands (e.g., `/deploy-staging` vs `/deploy-prod`).
+- **`/review` is a prompt checklist, not a scanner.** It names the right categories (secrets, input validation, dependency trust, infra exposure) but does not run `npm audit`, `gitleaks`, SAST, IaC policy, or your test suite. Pair it with real tools in CI; treat its output as supplementary signal, not proof.
+- **Plan ceremony scales with change size.** `/create-plan` is designed for non-trivial work. For small fixes, skip it or write a two-line inline plan in chat. Don't maintain plan artifacts for their own sake.
+- **Operational metadata belongs outside tracked files.** Even without credentials, hostnames, server paths, and deploy quirks in `CLAUDE.md` are operational intelligence. See "Keep sensitive details out of tracked files" below for the concrete pattern.
+- **Some commands will be workflow theater for your team.** The lifecycle commands (`/explore`, `/create-plan`, `/execute`, `/document`) carry the core value. `/create-issue`, `/save-recipe`, `/learning-opportunity`, and `/peer-review` are useful for specific situations — skip any that don't match how you actually work.
+
+`AGENTS.md` at the repo root contains a more structured version of this review, written to be handed directly to another LLM if you want an independent second pass on these tradeoffs.
+
 ## Who This Is For
 
 Builders who use Claude Code and want a repeatable workflow rather than a clean terminal. Comfort with Git, the terminal, and Markdown is assumed. Non-technical founders who can read code or configs will get value — you're reviewing the AI's work, not writing it yourself.
@@ -211,7 +225,9 @@ The most important file. It tells Claude Code who you are, what you're building,
 
 ### .claude/settings.local.json
 
-Default permissions allow git operations and SSH. Add your own server hostnames and any other commands you want Claude to run without prompting:
+Default permissions allow git operations. Add your own commands you want Claude to run without prompting — but the narrower the scope, the smaller the blast radius if Claude ever acts on an unexpected instruction.
+
+**Broad (what the template historically showed):**
 
 ```json
 {
@@ -223,6 +239,27 @@ Default permissions allow git operations and SSH. Add your own server hostnames 
   }
 }
 ```
+
+This gives Claude full shell access on your server via SSH. Convenient. Also means *any* natural-language request that leads to an SSH command gets executed without prompting.
+
+**Narrower (preferred for anything production-adjacent):**
+
+```json
+{
+  "permissions": {
+    "allow": [
+      "Bash(git:*)",
+      "Bash(./deploy.sh)",
+      "Bash(ssh your-user@your-server 'docker compose ps')",
+      "Bash(ssh your-user@your-server 'docker compose logs --tail=200')"
+    ]
+  }
+}
+```
+
+Scope each entry to a specific command or a specific read-only inspection. Commands that aren't on the list still work — they just require a confirmation prompt. That prompt is the guardrail.
+
+Think of it as a least-privilege list: add only what you're comfortable having execute without a human in the loop.
 
 ### Custom Commands
 

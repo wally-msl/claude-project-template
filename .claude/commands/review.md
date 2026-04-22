@@ -1,5 +1,7 @@
 Perform a comprehensive code review of the recent changes. Be thorough but concise.
 
+**Scope note:** this is an advisory prompt-driven checklist, not a scanner. It names the right categories but does not run `npm audit`, `gitleaks`, SAST, IaC policy, or the test suite. Treat the output as supplementary signal — for anything security-sensitive or production-bound, pair it with real tools in CI.
+
 ## Check For:
 
 **Security**

@@ -1,5 +1,7 @@
 Deploy current changes to the server.
 
+**Before running this command:** confirm that the target environment has whatever guardrails the user expects — branch protection, required reviews, CI gates, or a human approval step. This command will commit, push, and SSH. If the target is shared or production infrastructure and no approval step exists upstream, pause and ask before proceeding.
+
 ## Steps
 
 1. **Stage and commit:**
