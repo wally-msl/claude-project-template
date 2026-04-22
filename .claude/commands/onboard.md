@@ -13,15 +13,16 @@ Walk through CLAUDE.md and customize it for your project. This takes about 5 min
    - What's your tech stack? (languages, frameworks, database, infrastructure)
    - How do you deploy? (e.g., SSH to a server, push to Vercel, docker compose up)
    - What are 2-3 key architecture decisions I should respect?
-   - Do you have a server I should know how to SSH into? If so, what's the user@host and repo path?
+   - Do you have a server I should know how to SSH into? If so, what's the user@host and repo path? **Before writing the answer to `CLAUDE.md`, check whether this repo is public (or might become public) and warn me — real SSH hostnames, internal URLs, and server paths should not land in tracked files. Offer to use placeholders instead and keep the real values in shell config or a password manager.**
    - Are you doing SR&ED? (Canadian R&D tax credits — skip if unsure)
 
-3. **Update CLAUDE.md** with my answers, replacing all `[PLACEHOLDER]` sections.
+3. **Update CLAUDE.md** with my answers, replacing all `[PLACEHOLDER]` sections. If I chose placeholders for SSH/deploy details, preserve them as placeholders and note in the file that real values live elsewhere.
 
-4. **Update `.claude/settings.local.json`** if I gave you SSH details — add the server to the permission allowlist:
+4. **Update `.claude/settings.local.json`** if I gave you real SSH details — add the server to the permission allowlist:
    ```json
    "Bash(ssh [user]@[host]:*)"
    ```
+   Note: `.claude/settings.local.json` is typically gitignored, so real hostnames here are lower-risk than in `CLAUDE.md`. Still confirm before pasting anything sensitive.
 
 5. **Show me a summary** of what was configured and what's left to do.
 

@@ -60,7 +60,12 @@ At the start of every new session, run `git log --oneline -10` to review recent 
 
 ## Deployment Details
 
-<!-- [PLACEHOLDER] Fill in your actual deployment targets. Delete what doesn't apply. -->
+<!-- [PLACEHOLDER] Fill in your actual deployment targets. Delete what doesn't apply.
+
+     ⚠️  This file is tracked in git. Do NOT paste real SSH hostnames, internal
+     URLs, server paths, or credentials here if the repo is or will ever be public.
+     Keep sensitive environment-specific details in shell config, a password
+     manager, or an untracked file. Placeholders like [user]@[hostname] are fine. -->
 
 - **Server SSH:** `ssh [user]@[hostname]`
 - **Repo path on server:** `[/path/to/project/]`

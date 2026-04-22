@@ -22,8 +22,17 @@ venv/
 .env
 .env.local
 .env.*.local
+.envrc
 secrets.yaml
 *.age
+*.pem
+*.key
+id_rsa
+id_rsa.*
+id_ed25519
+id_ed25519.*
+*.p12
+*.pfx
 
 # Build
 dist/

@@ -184,6 +184,19 @@ claude-project-template/
 
 ## Customization Guide
 
+### Keep sensitive details out of tracked files
+
+`CLAUDE.md`, `docs/`, and `sred/` are all committed to git. Do not put real SSH hostnames, internal URLs, server paths, customer names, or credentials into them — especially if the repo is or will ever be public. The template intentionally uses placeholders like `[user]@[hostname]` for this reason.
+
+For anything environment-specific, use one of:
+
+- `.claude/settings.local.json` — already in `.gitignore` in most setups; good for per-machine permission allowlists
+- `.env.local` — already ignored; good for runtime secrets
+- Shell config or a password manager — good for SSH targets and deploy credentials
+- A separate, private repo or encrypted file (SOPS, age, Vault) — good for anything you want versioned but not exposed
+
+The onboarding wizard (`/onboard`) will ask for deploy details. Give it placeholders rather than real values if you're unsure where the repo will end up.
+
 ### CLAUDE.md
 
 The most important file. It tells Claude Code who you are, what you're building, and how you work. Template has clearly marked `[PLACEHOLDER]` sections — fill these in:
@@ -193,7 +206,7 @@ The most important file. It tells Claude Code who you are, what you're building,
 - **Tech Stack** — your actual technologies
 - **Architecture Decisions** — key choices Claude should respect
 - **Development Workflow** — how code gets from your machine to production
-- **Deployment Details** — SSH targets, paths, scripts
+- **Deployment Details** — SSH targets, paths, scripts (see the warning above before pasting real values)
 - **Code Style** — languages, conventions, patterns
 
 ### .claude/settings.local.json
